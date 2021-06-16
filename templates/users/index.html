@@ -1,0 +1,27 @@
+{{define "users/index.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>users/index</title>
+</head>
+<body>
+    {{.title}}
+    {{ .name | safe }}
+    {{.path}}
+    <form method="POST" action="/user/search">
+        <div>
+            <label>姓名：</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>地址：</label>
+            <input type="text" name="address"/>
+        </div>
+        <input type="submit" name="提交"/>
+    </form>
+</body>
+</html>
+{{end}}
