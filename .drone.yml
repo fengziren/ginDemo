@@ -10,10 +10,10 @@ workspace:
   path: /fengziren/src
 
 steps:
-- name: fetch
-  image: alpine/git
-  commands:
-  - git fetch --tags
+# - name: fetch
+#   image: alpine/git
+#   commands:
+#   - git fetch --tags
 # 测试
 - name: test
   image: golang
