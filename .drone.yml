@@ -4,6 +4,20 @@ name: default
 steps:
 - name: test
   image: golang
+  volumes:
+  - name: deps
+    path: /go
+  environment:
+      GO111MODULE: "on"
+      GOPROXY: "https://goproxy.cn,direct"
   commands:
+  - go mod tidy
   - go test
+
+- name: build
+  image: golang
+  volumes:
+  - name: golang
+    path: /go
+  commands:
   - go build
