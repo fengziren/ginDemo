@@ -26,3 +26,9 @@ steps:
   commands:
   - go mod tidy
   - go build
+
+trigger:
+  branch:
+  - main
+  event:
+  - push
