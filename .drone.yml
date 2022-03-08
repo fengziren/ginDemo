@@ -2,7 +2,19 @@ kind: pipeline
 type: docker
 name: default
 
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  path: /fengziren/src
+
 steps:
+- name: fetch
+  image: alpine/git
+  commands:
+  - git fetch -tags
+# 测试
 - name: test
   image: golang
   volumes:
@@ -14,7 +26,7 @@ steps:
   commands:
   - go mod tidy
   - go test
-
+# 构建
 - name: build
   image: golang
   volumes:
@@ -26,12 +38,35 @@ steps:
   commands:
   - go mod tidy
   - go build
+# 微信通知
+- name: wechat
+image: lizheming/drone-wechat
+settings:
+  corpid: 
+    from_secret: wechat_corpid
+  corp_secret:
+    from_secret: wechat_corp_secret
+  agent_id: 
+    from_secret: agent_id
+  to_user: 111
+  to_party: 112
+  to_tag: ${DRONE_REPO_NAME}
+  msg_url: ${DRONE_BUILD_LINK}
+  safe: 1
+  btn_txt: more
+  title: ${DRONE_REPO_NAME}
+  message: >
+    {%if success %}
+      build {{build.number}} succeeded. Good job.
+    {% else %}
+      build {{build.number}} failed. Fix me please.
+    {% endif %}
 
-# trigger:
-#   branch:
-#   - main
-#   event:
-#   - push
-#   status:
-#   - success
-#   - failure
+trigger:
+  branch:
+  - main
+  event:
+  - push
+  status:
+  - success
+  - failure
