@@ -40,27 +40,27 @@ steps:
   - go build
 # 微信通知
 - name: wechat
-image: lizheming/drone-wechat
-settings:
-  corpid: 
-    from_secret: wechat_corpid
-  corp_secret:
-    from_secret: wechat_corp_secret
-  agent_id: 
-    from_secret: agent_id
-  to_user: 111
-  to_party: 112
-  to_tag: ${DRONE_REPO_NAME}
-  msg_url: ${DRONE_BUILD_LINK}
-  safe: 1
-  btn_txt: more
-  title: ${DRONE_REPO_NAME}
-  message: >
-    {%if success %}
-      build {{build.number}} succeeded. Good job.
-    {% else %}
-      build {{build.number}} failed. Fix me please.
-    {% endif %}
+  image: lizheming/drone-wechat
+  settings:
+    corpid: 
+      from_secret: wechat_corpid
+    corp_secret:
+      from_secret: wechat_corp_secret
+    agent_id: 
+      from_secret: agent_id
+    to_user: 111
+    to_party: 112
+    to_tag: ${DRONE_REPO_NAME}
+    msg_url: ${DRONE_BUILD_LINK}
+    safe: 1
+    btn_txt: more
+    title: ${DRONE_REPO_NAME}
+    message: >
+      {%if success %}
+        build {{build.number}} succeeded. Good job.
+      {% else %}
+        build {{build.number}} failed. Fix me please.
+      {% endif %}
 
 trigger:
   branch:
