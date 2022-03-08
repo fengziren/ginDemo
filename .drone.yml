@@ -27,11 +27,11 @@ steps:
   - go mod tidy
   - go build
 
-trigger:
-  branch:
-  - main
-  event:
-  - push
-  status:
-  - success
-  - failure
+# trigger:
+#   branch:
+#   - main
+#   event:
+#   - push
+#   status:
+#   - success
+#   - failure
