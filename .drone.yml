@@ -1,4 +1,5 @@
 kind: pipeline
+type: docker
 name: default
 
 steps:
@@ -19,5 +20,9 @@ steps:
   volumes:
   - name: golang
     path: /go
+  environment:
+    GO111MODULE: "on"
+    GOPROXY: "https://goproxy.cn,direct"
   commands:
+  - go mod tidy
   - go build
