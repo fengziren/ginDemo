@@ -32,3 +32,6 @@ trigger:
   - main
   event:
   - push
+  status:
+  - success
+  - failure
