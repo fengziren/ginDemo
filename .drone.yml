@@ -13,7 +13,7 @@ steps:
 - name: fetch
   image: alpine/git
   commands:
-  - git fetch -tags
+  - git fetch --tags
 # 测试
 - name: test
   image: golang
