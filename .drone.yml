@@ -58,20 +58,24 @@ steps:
     to_user: "@all"
     message: >
       {% if success %}
-      😊主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建成功！
+      😊主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建成功！共花费 {{build.finished}-{build.started}}s
       {% else %}
-      😭主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建失败了，快来修理下吧。
+      😭主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建失败了，快来修理下吧。共花费 {{build.finished}-{build.started}}s
       {% endif %}
   when:
     status:
     - success
     - failure
+volumes:
+  name: cache
+  host:
+    path: /fengziren/cache
 
-trigger:
-  branch:
-  - main
-  event:
-  - push
-  status:
-  - success
-  - failure
+# trigger:
+#   branch:
+#   - main
+#   event:
+#   - push
+#   status:
+#   - success
+#   - failure
