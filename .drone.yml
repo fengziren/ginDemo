@@ -41,27 +41,28 @@ steps:
 # 微信通知
 - name: wechat
   image: lizheming/drone-wechat
+  pull: always
   settings:
+    title: >
+     {% if success %}
+     ✅ {{repo.owner}}/{{repo.name}} 第 {{build.number}} 次构建成功！
+     {% else %}
+     ❌ {{repo.owner}}/{{repo.name}} 第 {{build.number}} 次构建失败了，快来修理下吧。
+     {% endif %}
     corpid: 
       from_secret: wechat_corpid
     corp_secret:
       from_secret: wechat_corp_secret
-    agent_id: 
+    agent_id:
       from_secret: agent_id
     to_user: "@all"
-    # to_party: 112
-    to_tag: ${DRONE_REPO_NAME}
-    msg_url: ${DRONE_BUILD_LINK}
-    safe: 1
-    btn_txt: more
-    title: ${DRONE_REPO_NAME}
     message: >
-      {%if success %}
-        build {{build.number}} succeeded. Good job.
+      {% if success %}
+      😊主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建成功！
       {% else %}
-        build {{build.number}} failed. Fix me please.
+      😭主人，{{repo.owner}}/{{repo.name}}第{{build.number}}次构建失败了，快来修理下吧。
       {% endif %}
-    when:
+  when:
     status:
     - success
     - failure
