@@ -66,10 +66,10 @@ steps:
     status:
     - success
     - failure
-volumes:
-- name: buf
-  host:
-    path: /fengziren/buf
+# volumes:
+# - name: buf
+#   host:
+#     path: /fengziren/buf
 
 # trigger:
 #   branch:
