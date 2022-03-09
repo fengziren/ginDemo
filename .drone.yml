@@ -18,7 +18,7 @@ steps:
 - name: test
   image: golang
   volumes:
-  - name: deps
+  - name: buf
     path: /go
   environment:
       GO111MODULE: "on"
@@ -30,7 +30,7 @@ steps:
 - name: build
   image: golang
   volumes:
-  - name: golang
+  - name: buf
     path: /go
   environment:
     GO111MODULE: "on"
@@ -67,9 +67,9 @@ steps:
     - success
     - failure
 volumes:
-  name: golang
+- name: buf
   host:
-    path: /fengziren/cache
+    path: /fengziren/buf
 
 # trigger:
 #   branch:
