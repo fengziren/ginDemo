@@ -67,7 +67,7 @@ steps:
     - success
     - failure
 volumes:
-  name: cache
+  name: golang
   host:
     path: /fengziren/cache
 
